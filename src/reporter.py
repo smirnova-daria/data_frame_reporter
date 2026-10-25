@@ -16,3 +16,11 @@ class DataFrameReporter:
         print(f'Количество строк: {n_rows}')
         print(f'Количество дубликатов: {dups_count}')
         print(f'Доля дубликатов: {dups_percent:{self.percent_format}}')
+
+        print(df.describe(include='all' if self.include_all else None))
+
+        nulls_count = df.isna().sum().sum()
+        nulls_share = df.isna().mean(axis=None)
+
+        print(f'Количество пропусков: {nulls_count}')
+        print(f'Доля пропусков: {nulls_share:{self.float_format}}')
